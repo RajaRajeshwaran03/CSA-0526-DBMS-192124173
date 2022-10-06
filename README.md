@@ -15,3 +15,6 @@
 # [sql_queries](https://github.com/RajaRajeshwaran03/CSA-0526-DBMS-192124173/blob/main/DBMS-exp7.txt)
 # EXP_8
 # [sql_queries](https://github.com/RajaRajeshwaran03/CSA-0526-DBMS-192124173/blob/main/DBMS-exp8.txt)
+# EXP_9
+# [sql_queries](https://github.com/RajaRajeshwaran03/CSA-0526-DBMS-192124173/blob/main/EXPT%209.txt)
+
