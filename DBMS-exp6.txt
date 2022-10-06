@@ -1,0 +1,59 @@
+mysql> use dc
+Database changed
+mysql> desc patients;
++-------------+----------+------+-----+---------+-------+
+| Field       | Type     | Null | Key | Default | Extra |
++-------------+----------+------+-----+---------+-------+
+| p_number    | int(8)   | YES  |     | NULL    |       |
+| p_name      | char(10) | YES  |     | NULL    |       |
+| p_phone     | int(10)  | YES  |     | NULL    |       |
+| doctor_name | char(10) | NO   | PRI |         |       |
++-------------+----------+------+-----+---------+-------+
+4 rows in set (0.02 sec)
+
+mysql> create table disease
+    -> (patient_id int(10),disease char(20),patient_name char(20));
+Query OK, 0 rows affected (0.14 sec)
+
+mysql> desc disease;
++--------------+----------+------+-----+---------+-------+
+| Field        | Type     | Null | Key | Default | Extra |
++--------------+----------+------+-----+---------+-------+
+| patient_id   | int(10)  | YES  |     | NULL    |       |
+| disease      | char(20) | YES  |     | NULL    |       |
+| patient_name | char(20) | YES  |     | NULL    |       |
++--------------+----------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+mysql> insert into disease
+    -> values(9,'malaria','ajay'),(69,'dengue','prstinu'),(1,'dengue','santhosh');
+Query OK, 3 rows affected (0.13 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select*from disease
+    -> where patient_id in(9,69);
++------------+---------+--------------+
+| patient_id | disease | patient_name |
++------------+---------+--------------+
+|          9 | malaria | ajay         |
+|         69 | dengue  | prstinu      |
++------------+---------+--------------+
+2 rows in set (0.00 sec)
+mysql> select*from disease
+    -> where patient_name in('ajay','prstinu');
++------------+---------+--------------+
+| patient_id | disease | patient_name |
++------------+---------+--------------+
+|          9 | malaria | ajay         |
+|         69 | dengue  | prstinu      |
++------------+---------+--------------+
+2 rows in set (0.00 sec)
+
+mysql> select count(patient_id) from disease;
++-------------------+
+| count(patient_id) |
++-------------------+
+|                 3 |
++-------------------+
+1 row in set (0.09 sec)
+
+mysql>
