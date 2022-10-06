@@ -1,0 +1,29 @@
+mysql> use dc
+Database changed
+mysql> select*from patients;
++----------+----------+-----------+-------------+
+| p_number | p_name   | p_phone   | doctor_name |
++----------+----------+-----------+-------------+
+|        3 | govindan |  23456789 | omegababu   |
+|        2 | prstinu  | 989098909 | rowdy       |
+|        1 | ajay     | 782403467 | vathiyare   |
++----------+----------+-----------+-------------+
+3 rows in set (0.00 sec)
+
+mysql> select*from patients where p_number=1;
++----------+--------+-----------+-------------+
+| p_number | p_name | p_phone   | doctor_name |
++----------+--------+-----------+-------------+
+|        1 | ajay   | 782403467 | vathiyare   |
++----------+--------+-----------+-------------+
+1 row in set (0.00 sec)
+
+mysql> select*from patients where doctor_name='rowdy';
++----------+---------+-----------+-------------+
+| p_number | p_name  | p_phone   | doctor_name |
++----------+---------+-----------+-------------+
+|        2 | prstinu | 989098909 | rowdy       |
++----------+---------+-----------+-------------+
+1 row in set (0.00 sec)
+
+mysql>
