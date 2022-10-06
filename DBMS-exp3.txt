@@ -1,0 +1,52 @@
+mysql> use dc
+Database changed
+mysql> desc patients;
++-------------+----------+------+-----+---------+-------+
+| Field       | Type     | Null | Key | Default | Extra |
++-------------+----------+------+-----+---------+-------+
+| p_number    | int(8)   | YES  |     | NULL    |       |
+| p_name      | char(10) | YES  |     | NULL    |       |
+| p_phone     | int(10)  | YES  |     | NULL    |       |
+| doctor_name | char(10) | NO   | PRI |         |       |
++-------------+----------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> insert into patients
+    -> values(1,'ajay',782403467,'vathiyare'),(2,'prstinu',989098909,'vembuli'),(3,'govindan',23456789,'omegababu'),(4,'gundusant',98990980,'allaa');
+Query OK, 4 rows affected (0.13 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> desc patients;
++-------------+----------+------+-----+---------+-------+
+| Field       | Type     | Null | Key | Default | Extra |
++-------------+----------+------+-----+---------+-------+
+| p_number    | int(8)   | YES  |     | NULL    |       |
+| p_name      | char(10) | YES  |     | NULL    |       |
+| p_phone     | int(10)  | YES  |     | NULL    |       |
+| doctor_name | char(10) | NO   | PRI |         |       |
++-------------+----------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> select*from patients;
++----------+-----------+-----------+-------------+
+| p_number | p_name    | p_phone   | doctor_name |
++----------+-----------+-----------+-------------+
+|        4 | gundusant |  98990980 | allaa       |
+|        3 | govindan  |  23456789 | omegababu   |
+|        1 | ajay      | 782403467 | vathiyare   |
+|        2 | prstinu   | 989098909 | vembuli     |
++----------+-----------+-----------+-------------+
+4 rows in set (0.00 sec)
+
+mysql> select p_name from patients;
++-----------+
+| p_name    |
++-----------+
+| gundusant |
+| govindan  |
+| ajay      |
+| prstinu   |
++-----------+
+4 rows in set (0.00 sec)
+
+mysql>
