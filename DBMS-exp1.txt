@@ -1,0 +1,58 @@
+mysql> create database dc
+    -> ;
+Query OK, 1 row affected (0.22 sec)
+
+
+mysql> use dc;
+Database changed
+mysql> create table doctors
+    -> (doctor_name char(10),sex char(1),phone int(10),dept char(10));
+Query OK, 0 rows affected (0.17 sec)
+
+mysql> desc doctors
+    -> ;
++-------------+----------+------+-----+---------+-------+
+| Field       | Type     | Null | Key | Default | Extra |
++-------------+----------+------+-----+---------+-------+
+| doctor_name | char(10) | YES  |     | NULL    |       |
+| sex         | char(1)  | YES  |     | NULL    |       |
+| phone       | int(10)  | YES  |     | NULL    |       |
+| dept        | char(10) | YES  |     | NULL    |       |
++-------------+----------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> alter tabledoctors
+    -> add column dob int(8);
+
+Query OK, 0 rows affected (1.85 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc doctors;
++-------------+----------+------+-----+---------+-------+
+| Field       | Type     | Null | Key | Default | Extra |
++-------------+----------+------+-----+---------+-------+
+| doctor_name | char(10) | YES  |     | NULL    |       |
+| sex         | char(1)  | YES  |     | NULL    |       |
+| phone       | int(10)  | YES  |     | NULL    |       |
+| dept        | char(10) | YES  |     | NULL    |       |
+| dob         | int(8)   | YES  |     | NULL    |       |
++-------------+----------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> alter table doctors
+    -> drop column dob;
+Query OK, 0 rows affected (0.17 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc doctors;
++-------------+----------+------+-----+---------+-------+
+| Field       | Type     | Null | Key | Default | Extra |
++-------------+----------+------+-----+---------+-------+
+| doctor_name | char(10) | YES  |     | NULL    |       |
+| sex         | char(1)  | YES  |     | NULL    |       |
+| phone       | int(10)  | YES  |     | NULL    |       |
+| dept        | char(10) | YES  |     | NULL    |       |
++-------------+----------+------+-----+---------+-------+
+4 rows in set (0.03 sec)
+
+mysql>
