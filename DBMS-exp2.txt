@@ -1,0 +1,37 @@
+mysql> use dc
+Database changed
+mysql>alter table patients
+    ->add primary key(doctor_name);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+mysql> desc patients;
++-------------+----------+------+-----+---------+-------+
+| Field       | Type     | Null | Key | Default | Extra |
++-------------+----------+------+-----+---------+-------+
+| p_number    | int(8)   | YES  |     | NULL    |       |
+| p_name      | char(10) | YES  |     | NULL    |       |
+| p_phone     | int(10)  | YES  |     | NULL    |       |
+| doctor_name | char(10) | NO   | PRI |         |       |
++-------------+----------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+mysql> alter table doctors
+    -> add foreign key (doctor_name) references patients(doctor_name);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+mysql> alter table doctors
+    -> add unique (phone);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc doctors;
++-------------+----------+------+-----+---------+-------+
+| Field       | Type     | Null | Key | Default | Extra |
++-------------+----------+------+-----+---------+-------+
+| doctor_name | char(10) | YES  | MUL | NULL    |       |
+| sex         | char(1)  | NO   | PRI |         |       |
+| phone       | int(10)  | YES  | UNI | NULL    |       |
+| dept        | char(10) | YES  |     | NULL    |       |
++-------------+----------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql>
