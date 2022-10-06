@@ -1,0 +1,82 @@
+Enter password: *******
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 11
+Server version: 5.5.62 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use dc
+Database changed
+mysql> select*from disease;
++------------+---------+--------------+
+| patient_id | disease | patient_name |
++------------+---------+--------------+
+|          9 | malaria | ajay         |
+|         69 | dengue  | prstinu      |
+|          1 | dengue  | santhosh     |
++------------+---------+--------------+
+3 rows in set (0.01 sec)
+
+mysql> insert into disease
+    -> values(2,'diarrhea','santhosh'),(5,'ebola','arsath');
+Query OK, 2 rows affected (0.12 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select*from disease
+    -> order by disease;
++------------+----------+--------------+
+| patient_id | disease  | patient_name |
++------------+----------+--------------+
+|         69 | dengue   | prstinu      |
+|          1 | dengue   | santhosh     |
+|          2 | diarrhea | santhosh     |
+|          5 | ebola    | arsath       |
+|          9 | malaria  | ajay         |
++------------+----------+--------------+
+5 rows in set (0.00 sec)
+
+mysql> select*from disease
+    -> order by patient_id;
++------------+----------+--------------+
+| patient_id | disease  | patient_name |
++------------+----------+--------------+
+|          1 | dengue   | santhosh     |
+|          2 | diarrhea | santhosh     |
+|          5 | ebola    | arsath       |
+|          9 | malaria  | ajay         |
+|         69 | dengue   | prstinu      |
++------------+----------+--------------+
+5 rows in set (0.00 sec)
+
+mysql> select*from disease
+    -> order by patient_name
+    -> ;
++------------+----------+--------------+
+| patient_id | disease  | patient_name |
++------------+----------+--------------+
+|          9 | malaria  | ajay         |
+|          5 | ebola    | arsath       |
+|         69 | dengue   | prstinu      |
+|          1 | dengue   | santhosh     |
+|          2 | diarrhea | santhosh     |
++------------+----------+--------------+
+5 rows in set (0.00 sec)
+
+mysql> select*from disease
+    -> having patient_id>2;
++------------+---------+--------------+
+| patient_id | disease | patient_name |
++------------+---------+--------------+
+|          9 | malaria | ajay         |
+|         69 | dengue  | prstinu      |
+|          5 | ebola   | arsath       |
++------------+---------+--------------+
+3 rows in set (0.00 sec)
+
+mysql>
