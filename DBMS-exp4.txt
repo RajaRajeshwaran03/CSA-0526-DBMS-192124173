@@ -1,0 +1,55 @@
+mysql> use dc
+Database changed
+mysql> desc patients;
++-------------+----------+------+-----+---------+-------+
+| Field       | Type     | Null | Key | Default | Extra |
++-------------+----------+------+-----+---------+-------+
+| p_number    | int(8)   | YES  |     | NULL    |       |
+| p_name      | char(10) | YES  |     | NULL    |       |
+| p_phone     | int(10)  | YES  |     | NULL    |       |
+| doctor_name | char(10) | NO   | PRI |         |       |
++-------------+----------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> select*from patients;
++----------+-----------+-----------+-------------+
+| p_number | p_name    | p_phone   | doctor_name |
++----------+-----------+-----------+-------------+
+|        4 | gundusant |  98990980 | allaa       |
+|        3 | govindan  |  23456789 | omegababu   |
+|        1 | ajay      | 782403467 | vathiyare   |
+|        2 | prstinu   | 989098909 | vembuli     |
++----------+-----------+-----------+-------------+
+4 rows in set (0.00 sec)
+
+mysql> delete from patients
+    -> where p_number=4;
+Query OK, 1 row affected (0.12 sec)
+
+mysql> select*from patients;
++----------+----------+-----------+-------------+
+| p_number | p_name   | p_phone   | doctor_name |
++----------+----------+-----------+-------------+
+|        3 | govindan |  23456789 | omegababu   |
+|        1 | ajay     | 782403467 | vathiyare   |
+|        2 | prstinu  | 989098909 | vembuli     |
++----------+----------+-----------+-------------+
+3 rows in set (0.00 sec)
+
+mysql> update patients
+    -> set doctor_name='rowdy'
+    -> where p_number=2;
+Query OK, 1 row affected (0.11 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select*from patients;
++----------+----------+-----------+-------------+
+| p_number | p_name   | p_phone   | doctor_name |
++----------+----------+-----------+-------------+
+|        3 | govindan |  23456789 | omegababu   |
+|        2 | prstinu  | 989098909 | rowdy       |
+|        1 | ajay     | 782403467 | vathiyare   |
++----------+----------+-----------+-------------+
+3 rows in set (0.00 sec)
+
+mysql>
