@@ -1,0 +1,51 @@
+mysql> use dc
+Database changed
+mysql> desc disease;
++--------------+----------+------+-----+---------+-------+
+| Field        | Type     | Null | Key | Default | Extra |
++--------------+----------+------+-----+---------+-------+
+| patient_id   | int(10)  | YES  |     | NULL    |       |
+| disease      | char(20) | YES  |     | NULL    |       |
+| patient_name | char(20) | YES  |     | NULL    |       |
++--------------+----------+------+-----+---------+-------+
+3 rows in set (0.13 sec)
+
+mysql> desc patients;
++-------------+----------+------+-----+---------+-------+
+| Field       | Type     | Null | Key | Default | Extra |
++-------------+----------+------+-----+---------+-------+
+| p_number    | int(8)   | YES  |     | NULL    |       |
+| p_name      | char(10) | YES  |     | NULL    |       |
+| p_phone     | int(10)  | YES  |     | NULL    |       |
+| doctor_name | char(10) | NO   | PRI |         |       |
++-------------+----------+------+-----+---------+-------+
+4 rows in set (0.14 sec)
+
+mysql> create view patients_view as select p_number,p_name and p_phone from patients;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> select*from patients_view
+    -> ;
++----------+--------------------+
+| p_number | p_name and p_phone |
++----------+--------------------+
+|        3 |                  0 |
+|        2 |                  0 |
+|        1 |                  0 |
++----------+--------------------+
+3 rows in set, 3 warnings (0.00 sec)
+
+mysql> create index p_name on patients(p_name);
+Query OK, 0 rows affected (0.14 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> show index from patients;
++----------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+| Table    | Non_unique | Key_name | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment |
++----------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+| patients |          0 | PRIMARY  |            1 | doctor_name | A         |           3 |     NULL | NULL   |      | BTREE      |         |               |
+| patients |          1 | p_name   |            1 | p_name      | A         |           3 |     NULL | NULL   | YES  | BTREE      |         |               |
++----------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+2 rows in set (0.00 sec)
+
+mysql>
