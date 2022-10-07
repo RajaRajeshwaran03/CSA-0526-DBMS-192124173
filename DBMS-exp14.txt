@@ -1,0 +1,85 @@
+mysql> use dc
+Database changed
+mysql> show tables;
++---------------+
+| Tables_in_dc  |
++---------------+
+| disease       |
+| doctors       |
+| hehe          |
+| patients      |
+| patients_view |
++---------------+
+5 rows in set (0.00 sec)
+
+mysql> desc patients;
++-------------+----------+------+-----+---------+-------+
+| Field       | Type     | Null | Key | Default | Extra |
++-------------+----------+------+-----+---------+-------+
+| p_number    | int(8)   | YES  |     | NULL    |       |
+| p_name      | char(10) | YES  | MUL | NULL    |       |
+| p_phone     | int(10)  | YES  |     | NULL    |       |
+| doctor_name | char(10) | NO   | PRI |         |       |
++-------------+----------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> desc doctors;
++-------------+----------+------+-----+---------+-------+
+| Field       | Type     | Null | Key | Default | Extra |
++-------------+----------+------+-----+---------+-------+
+| doctor_name | char(10) | YES  | MUL | NULL    |       |
+| sex         | char(1)  | NO   | PRI |         |       |
+| phone       | int(10)  | YES  | UNI | NULL    |       |
+| dept        | char(10) | YES  |     | NULL    |       |
++-------------+----------+------+-----+---------+-------+
+4 rows in set (0.16 sec)
+
+mysql> grant all on patients to rakii;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> show grants for rakii;
++--------------------------------------------------------+
+| Grants for rakii@%                                     |
++--------------------------------------------------------+
+| GRANT USAGE ON *.* TO 'rakii'@'%'                      |
+| GRANT ALL PRIVILEGES ON `dc`.`patients` TO 'rakii'@'%' |
++--------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+mysql> revoke all on patients from rakii;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> show grants for rakii
+    -> ;
++-----------------------------------+
+| Grants for rakii@%                |
++-----------------------------------+
+| GRANT USAGE ON *.* TO 'rakii'@'%' |
++-----------------------------------+
+1 row in set (0.00 sec)
+
+mysql> grant select,update on patients to rakii;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> show grants for rakii;
++--------------------------------------------------------+
+| Grants for rakii@%                                     |
++--------------------------------------------------------+
+| GRANT USAGE ON *.* TO 'rakii'@'%'                      |
+| GRANT SELECT, UPDATE ON `dc`.`patients` TO 'rakii'@'%' |
++--------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+mysql> revoke update on patients from rakii;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> show grants for rakii;
++------------------------------------------------+
+| Grants for rakii@%                             |
++------------------------------------------------+
+| GRANT USAGE ON *.* TO 'rakii'@'%'              |
+| GRANT SELECT ON `dc`.`patients` TO 'rakii'@'%' |
++------------------------------------------------+
+2 rows in set (0.00 sec)
+
+mysql>
