@@ -1,0 +1,125 @@
+mysql> use GH;
+Database changed
+mysql> DELIMITER //
+mysql> CREATE FUNCTION CUSTOMER(CRE_LIM INT)
+RETURNS VARCHAR(20)
+DETERMINISTIC
+BEGIN
+DECLARE PASSENGER_CLASS VARCHAR(20);
+S' at line 1
+mysql> DELIMITER //
+mysql> CREATE FUNCTION PASSENGER(PAS_LIM INT)
+    -> RETURNS VARCHAR(20)
+    -> DETERMINISTIC
+    -> BEGIN
+    -> DECLARE PASSENGER_CLASS VARCHAR(20);
+    -> SET PASSENGER_CLASS='';
+    -> IF PAS_LIM >50000 THEN
+    -> SET PASSENGER_CLASS='FIRST';
+    -> ELSEIF PAS_LIM <=50000 AND PAS_LIM>=10000 THEN
+    -> SET PASSENGER_CLASS='GOLD';
+    -> ELSEIF PAS_LIM < 10000 THEN
+    -> SET PASSENGER_CLASS='ECONOMY';
+    -> END IF;
+    -> RETURN PASSENGER_CLASS;
+    -> END //
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> SELECT PASSENGER(40000);
+    -> //
++------------------+
+| PASSENGER(40000) |
++------------------+
+| GOLD             |
++------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT PASSENGER(10000);
+    -> //
++------------------+
+| PASSENGER(10000) |
++------------------+
+| GOLD             |
++------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT PASSENGER(111000);
+    -> //
++-------------------+
+| PASSENGER(111000) |
++-------------------+
+| FIRST             |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT PASSENGER(1000);
+    -> //
++-----------------+
+| PASSENGER(1000) |
++-----------------+
+| ECONOMY         |
++-----------------+
+1 row in set (0.00 sec)
+
+mysql> DELIMITER $$
+mysql> CREATE PROCEDURE FIND_FACT(IN n INT)
+    -> BEGIN
+    -> SET @@GLOBAL.max_sp_recursion_depth =255;
+    -> SET @@session.max_sp_recursion_depth =255;
+    -> CALL factorial(n,@fact);
+    -> SELECT @fact;
+    -> END
+    -> $$
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> DELIMITER $$
+mysql> CREATE PROCEDURE factorial(IN n INT,OUT fact INT)
+    -> BEGIN
+    -> IF n=1 THEN
+    -> SET fact:=-1;
+    -> ELSE
+    -> CALL factorial(n-1,fact);
+    -> SET fact:=n* fact;
+    -> END IF;
+    -> END
+    -> $$
+Query OK, 0 rows affected (0.01SEC)
+mysql> CALL FIND_FACT(5);
+    -> $$
++-------+
+| @fact |
++-------+
+|  -120 |
++-------+
+1 row in set (0.01 sec)
+
+mysql> USE GH
+Database changed
+mysql> DELIMITER //
+mysql> CREATE FUNCTION FIND_SUM1(A INT, B INT)
+    -> RETURNS INT
+    -> DETERMINISTIC
+    -> BEGIN
+    -> DECLARE SUM INT;
+    -> SET SUM=A+B;
+    -> RETURN SUM;
+    -> END //
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> SELECT FIND_SUM1(4,7);
+    -> //
++----------------+
+| FIND_SUM1(4,7) |
++----------------+
+|             11 |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT FIND_SUM1(-2,-9);
+    -> //
++------------------+
+| FIND_SUM1(-2,-9) |
++------------------+
+|              -11 |
++------------------+
+1 row in set (0.00 sec)
