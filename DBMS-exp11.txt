@@ -1,0 +1,73 @@
+mysql> use dc
+Database changed
+mysql> select*from patients;
++----------+----------+-----------+-------------+
+| p_number | p_name   | p_phone   | doctor_name |
++----------+----------+-----------+-------------+
+|        3 | govindan |  23456789 | omegababu   |
+|        4 | arshhh   | 982403457 | rekha       |
+|        2 | prstinu  | 989098909 | rowdy       |
+|        1 | ajay     | 782403467 | vathiyare   |
++----------+----------+-----------+-------------+
+4 rows in set (0.00 sec)
+mysql> select p_name,p_number,
+    -> case
+    -> when p_number<2 then 'AIDS'
+    -> when p_number>2 then 'piles'
+    -> else 'healthy'
+    -> end performance
+    -> from patients;
++----------+----------+-------------+
+| p_name   | p_number | performance |
++----------+----------+-------------+
+| govindan |        3 | piles       |
+| arshhh   |        4 | piles       |
+| prstinu  |        2 | healthy     |
+| ajay     |        1 | AIDS        |
++----------+----------+-------------+
+4 rows in set (0.00 sec)
+
+mysql> select*from patients;
++----------+----------+-----------+-------------+
+| p_number | p_name   | p_phone   | doctor_name |
++----------+----------+-----------+-------------+
+|        3 | govindan |  23456789 | omegababu   |
+|        4 | arshhh   | 982403457 | rekha       |
+|        2 | prstinu  | 989098909 | rowdy       |
+|        1 | ajay     | 782403467 | vathiyare   |
++----------+----------+-----------+-------------+
+4 rows in set (0.00 sec)
+
+mysql> insert into patients value(5,'kakash',98989898,'gomathika'),(6,'gundu',6758473,'kumar');
+Query OK, 2 rows affected (0.17 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select*from patients;
++----------+----------+-----------+-------------+
+| p_number | p_name   | p_phone   | doctor_name |
++----------+----------+-----------+-------------+
+|        5 | kakash   |  98989898 | gomathika   |
+|        6 | gundu    |   6758473 | kumar       |
+|        3 | govindan |  23456789 | omegababu   |
+|        4 | arshhh   | 982403457 | rekha       |
+|        2 | prstinu  | 989098909 | rowdy       |
+|        1 | ajay     | 782403467 | vathiyare   |
++----------+----------+-----------+-------------+
+6 rows in set (0.00 sec)
+
+mysql> select p_name,p_number,
+    -> if(p_number>3,'hiv','piles')
+    -> from patients;
++----------+----------+------------------------------+
+| p_name   | p_number | if(p_number>3,'hiv','piles') |
++----------+----------+------------------------------+
+| kakash   |        5 | hiv                          |
+| gundu    |        6 | hiv                          |
+| govindan |        3 | piles                        |
+| arshhh   |        4 | hiv                          |
+| prstinu  |        2 | piles                        |
+| ajay     |        1 | piles                        |
++----------+----------+------------------------------+
+6 rows in set (0.01 sec)
+
+mysql>
