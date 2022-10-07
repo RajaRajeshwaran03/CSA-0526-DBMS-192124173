@@ -1,0 +1,51 @@
+mysql> use dc
+Database changed
+mysql> select*from patients;
++----------+----------+-----------+-------------+
+| p_number | p_name   | p_phone   | doctor_name |
++----------+----------+-----------+-------------+
+|        5 | kakash   |  98989898 | gomathika   |
+|        6 | gundu    |   6758473 | kumar       |
+|        3 | govindan |  23456789 | omegababu   |
+|        4 | arshhh   | 982403457 | rekha       |
+|        2 | prstinu  | 989098909 | rowdy       |
+|        1 | ajay     | 782403467 | vathiyare   |
++----------+----------+-----------+-------------+
+6 rows in set (0.00 sec)
+
+mysql> DELIMITER //
+mysql> CREATE PROCEDURE patients_info()
+    -> begin
+    -> select*from patients;
+    -> end;//
+ERROR 1304 (42000): PROCEDURE patients_info already exists
+mysql> select*from patients;
+    ->
+    -> show tables
+    -> end;//
++----------+----------+-----------+-------------+
+| p_number | p_name   | p_phone   | doctor_name |
++----------+----------+-----------+-------------+
+|        5 | kakash   |  98989898 | gomathika   |
+|        6 | gundu    |   6758473 | kumar       |
+|        3 | govindan |  23456789 | omegababu   |
+|        4 | arshhh   | 982403457 | rekha       |
+|        2 | prstinu  | 989098909 | rowdy       |
+|        1 | ajay     | 782403467 | vathiyare   |
++----------+----------+-----------+-------------+
+6 rows in set (0.00 sec)
+
+    -> //
++----------+----------+-----------+-------------+
+| p_number | p_name   | p_phone   | doctor_name |
++----------+----------+-----------+-------------+
+|        5 | kakash   |  98989898 | gomathika   |
+|        6 | gundu    |   6758473 | kumar       |
+|        3 | govindan |  23456789 | omegababu   |
+|        4 | arshhh   | 982403457 | rekha       |
+|        2 | prstinu  | 989098909 | rowdy       |
+|        1 | ajay     | 782403467 | vathiyare   |
++----------+----------+-----------+-------------+
+6 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.03 sec)
