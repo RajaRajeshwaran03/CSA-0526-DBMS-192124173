@@ -1,0 +1,115 @@
+mysql> use gh
+Database changed
+mysql> create table pass_det(pass_no int(12),pass_name varchar(20),DOJ DATE,Ticketfare int(12),brding_from varchar(20),nationality varchar(30));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc pass_det;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| pass_no     | int(12)     | YES  |     | NULL    |       |
+| pass_name   | varchar(20) | YES  |     | NULL    |       |
+| DOJ         | date        | YES  |     | NULL    |       |
+| Ticketfare  | int(12)     | YES  |     | NULL    |       |
+| brding_from | varchar(20) | YES  |     | NULL    |       |
+| nationality | varchar(30) | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+6 rows in set (0.02 sec)
+
+mysql> insert into pass_det values(1,'alejandro','2022-10-16',38000,'madrid','puerto_rico'),(2,'vladivoski','2022-10-17',34500,'st_petersberg','russian'),(3,'brian','2022-10-22',56700,'atlanta','american'),(4,'hamdan','2022-10-09',68000,'zurich','emirati'),(5,'xiao_cho_min','2022-10-12',45900,'hongkong','chinese');
+Query OK, 5 rows affected (0.00 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select*from pass_det;
++---------+--------------+------------+------------+---------------+-------------+
+| pass_no | pass_name    | DOJ        | Ticketfare | brding_from   | nationality |
++---------+--------------+------------+------------+---------------+-------------+
+|       1 | alejandro    | 2022-10-16 |      38000 | madrid        | puerto_rico |
+|       2 | vladivoski   | 2022-10-17 |      34500 | st_petersberg | russian     |
+|       3 | brian        | 2022-10-22 |      56700 | atlanta       | american    |
+|       4 | hamdan       | 2022-10-09 |      68000 | zurich        | emirati     |
+|       5 | xiao_cho_min | 2022-10-12 |      45900 | hongkong      | chinese     |
++---------+--------------+------------+------------+---------------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> update pass_det set brding_from='sao_paulo' where pass_no=1;
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select*from pass_det;
++---------+--------------+------------+------------+---------------+-------------+
+| pass_no | pass_name    | DOJ        | Ticketfare | brding_from   | nationality |
++---------+--------------+------------+------------+---------------+-------------+
+|       1 | alejandro    | 2022-10-16 |      38000 | sao_paulo     | puerto_rico |
+|       2 | vladivoski   | 2022-10-17 |      34500 | st_petersberg | russian     |
+|       3 | brian        | 2022-10-22 |      56700 | atlanta       | american    |
+|       4 | hamdan       | 2022-10-09 |      68000 | zurich        | emirati     |
+|       5 | xiao_cho_min | 2022-10-12 |      45900 | hongkong      | chinese     |
++---------+--------------+------------+------------+---------------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> create table dett(FLIGHT_NO int(9),destination varchar(19),time DATE);
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> alter table dett
+    -> drop column time;
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table dett
+    -> add column terminal int(6);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> insert into dett values(545,'dubai',4),(538,'chennai',3),(047,'frankfurt',2),(522,'doha',1);
+Query OK, 4 rows affected (0.01 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select*from dett;
++-----------+-------------+----------+
+| FLIGHT_NO | destination | terminal |
++-----------+-------------+----------+
+|       545 | dubai       |        4 |
+|       538 | chennai     |        3 |
+|        47 | frankfurt   |        2 |
+|       522 | doha        |        1 |
++-----------+-------------+----------+
+4 rows in set (0.00 sec)
+
+mysql> select sum(Ticketfare),min(Ticketfare),max(Ticketfare),avg(Ticketfare) from pass_det;
++-----------------+-----------------+-----------------+-----------------+
+| sum(Ticketfare) | min(Ticketfare) | max(Ticketfare) | avg(Ticketfare) |
++-----------------+-----------------+-----------------+-----------------+
+|          243100 |           34500 |           68000 |      48620.0000 |
++-----------------+-----------------+-----------------+-----------------+
+1 row in set (0.01 sec)
+
+mysql> create view dett_view as select pass_name,Ticketfare from pass_det;
+Query OK, 0 rows affected (0.01 sec)
+
++--------------+------------+
+| pass_name    | Ticketfare |
++--------------+------------+
+| alejandro    |      38000 |
+| vladivoski   |      34500 |
+| brian        |      56700 |
+| hamdan       |      68000 |
+| xiao_cho_min |      45900 |
++--------------+------------+
+5 rows in set (0.04 sec)
+
+mysql> delete from pass_det where pass_no=5;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select*from pass_det;
++---------+------------+------------+------------+---------------+-------------+
+| pass_no | pass_name  | DOJ        | Ticketfare | brding_from   | nationality |
++---------+------------+------------+------------+---------------+-------------+
+|       1 | alejandro  | 2022-10-16 |      38000 | sao_paulo     | puerto_rico |
+|       2 | vladivoski | 2022-10-17 |      34500 | st_petersberg | russian     |
+|       3 | brian      | 2022-10-22 |      56700 | atlanta       | american    |
+|       4 | hamdan     | 2022-10-09 |      68000 | zurich        | emirati     |
++---------+------------+------------+------------+---------------+-------------+
+4 rows in set (0.00 sec)
+
+mysql>
