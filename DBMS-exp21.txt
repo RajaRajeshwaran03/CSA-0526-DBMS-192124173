@@ -1,0 +1,51 @@
+mysql> use gh
+Database changed
+mysql> select*from pass_det;
++---------+------------+------------+------------+---------------+-------------+
+| pass_no | pass_name  | DOJ        | Ticketfare | brding_from   | nationality |
++---------+------------+------------+------------+---------------+-------------+
+|       1 | alejandro  | 2022-10-16 |      38000 | sao_paulo     | puerto_rico |
+|       2 | vladivoski | 2022-10-17 |      34500 | st_petersberg | russian     |
+|       3 | brian      | 2022-10-22 |      56700 | atlanta       | american    |
+|       4 | hamdan     | 2022-10-09 |      68000 | zurich        | emirati     |
++---------+------------+------------+------------+---------------+-------------+
+4 rows in set (0.00 sec)
+
+mysql> select*from dett;
++-----------+-------------+----------+
+| FLIGHT_NO | destination | terminal |
++-----------+-------------+----------+
+|       545 | dubai       |        4 |
+|       538 | chennai     |        3 |
+|        47 | frankfurt   |        2 |
+|       522 | doha        |        1 |
++-----------+-------------+----------+
+4 rows in set (0.00 sec)
+
+mysql> select pass_name,DOJ from pass_det where DOJ>='2022-10-22';
++-----------+------------+
+| pass_name | DOJ        |
++-----------+------------+
+| brian     | 2022-10-22 |
++-----------+------------+
+1 row in set (0.00 sec)
+
+mysql> select pass_name,DOJ from pass_det where DOJ>='2022-10-12';
++------------+------------+
+| pass_name  | DOJ        |
++------------+------------+
+| alejandro  | 2022-10-16 |
+| vladivoski | 2022-10-17 |
+| brian      | 2022-10-22 |
++------------+------------+
+3 rows in set (0.00 sec)
+mysql> select e.pass_name,e.DOJ,d.destination,d.terminal from pass_det e inner join dett d on e.terminal=d.terminal;
++-------------+------------+-------------+----------+
+| pass_name   | DOJ        | destination | terminal |
++-------------+------------+-------------+----------+
+| alejandro   | 2022-10-16 |    dubai    | 4        |
+| vladivoski  | 2022-10-17 |    chennai  | 3        |
+| brian       | 2022-10-22 |    frankfurt| 2        |
+| hamdan      | 2022-10-09 |    doha     | 1        |
++-------------+------------+-------------+----------+
+4 rows in set (0.00 sec)
